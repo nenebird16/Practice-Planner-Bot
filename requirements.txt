@@ -5,14 +5,10 @@ langchain_groq
 langchain_google_genai
 langchain-text-splitters
 langchainhub
-python-docx
 langchain-huggingface
 rich
-pypdf
 google-generativeai
 python-dotenv
-docx2txt
-lark
 streamlit
 edge_tts
 streamlit_mic_recorder
