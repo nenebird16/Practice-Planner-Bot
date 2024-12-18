@@ -1,6 +1,6 @@
 [theme]
 primaryColor="#12a131"  # Green color for the upper line of the test bar
 backgroundColor="#000000"  # Black background color
-secondaryBackgroundColor="#808080"  # Gray sidebar color
+secondaryBackgroundColor="#000000"  # Gray sidebar color
 textColor="#ffffff"  # White text color
 font="sans serif"  # Sans-serif font
