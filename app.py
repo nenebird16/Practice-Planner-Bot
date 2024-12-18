@@ -15,9 +15,9 @@ import tempfile
 # Load environment variables
 dotenv.load_dotenv()
 
-os.environ['GROQ_API_KEY'] = os.getenv("GROQ_API_KEY")
-os.environ['GOOGLE_API_KEY'] = os.getenv("GOOGLE_API_KEY")     ## add your api key here
-os.environ['COHERE_API_KEY'] = os.getenv("COHERE_API_KEY")
+os.environ['GROQ_API_KEY'] = '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'
+os.environ['GOOGLE_API_KEY'] = "AIzaSyBYyvQTqe9qdQTWKPp4hyjyFYKkjfNTero"    
+os.environ['COHERE_API_KEY'] = "6zXEeF9WcwbBmRFExg0b5JSc8ZgH77o1LwuOf1hs"
 
 
 # Available voices for Text-to-Speech
@@ -105,7 +105,9 @@ def rag_qa_chain(question, retriever, chat_history):
   - Frameworks
   - Strength and Conditioning
   - Practice Plan Templates
-- **Formatting**: Ensure the generated practice plan matches the formatting of `Practice-Plan-Template.md`. And if there are any discription about any drill please provide it when you will give the details about that drill. And if you don't have then its ok you don't have to mention it.
+- **Formatting**: Ensure the generated practice plan matches the formatting of `Practice-Plan-Template.md`. And if there are any discriptions about any drill please provide it when you will give the details about that drill. And if you don't have then its ok you don't have to mention it. Please don't provide any wrong description about anything. Don't give any Day time and year.
+
+
 
 ### Guidelines:
 
@@ -154,7 +156,7 @@ Retrieved Documents (Context):
         | output_parser
     )
 
-    return rag_chain.invoke({"question": question, "chat_history": chat_history})
+    return rag_chain.stream({"question": question, "chat_history": chat_history})
 
 
 
@@ -213,15 +215,12 @@ if text or query:
 
     # Generate response
     with col2.chat_message("assistant", avatar="./images/coach.png"):
-        try:
-            response = st.write_stream(rag_qa_chain(question=text if text else query,
-                                retriever=st.session_state["vectorstore"].as_retriever(search_kwargs={"k": 6}),
-                                chat_history=st.session_state.chat_history))
-        
-            # Add response to chat history
-            st.session_state.chat_history.append({"role": "assistant", "content": response})
-        except Exception as e:
-            st.error(f"An internal error occurred. Please check your internet connection")
+        response = st.write_stream(rag_qa_chain(question=text if text else query,
+                            retriever=st.session_state["vectorstore"].as_retriever(search_kwargs={"k": 6}),
+                            chat_history=st.session_state.chat_history))
+    
+        # Add response to chat history
+        st.session_state.chat_history.append({"role": "assistant", "content": response})
 
     # Generate voice response if the user has enabled it
     if "voice_response" in st.session_state and st.session_state.voice_response:
