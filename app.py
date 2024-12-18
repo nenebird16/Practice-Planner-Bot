@@ -15,9 +15,9 @@ import tempfile
 # Load environment variables
 dotenv.load_dotenv()
 
-os.environ['GROQ_API_KEY'] = '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'
-os.environ['GOOGLE_API_KEY'] = "AIzaSyBYyvQTqe9qdQTWKPp4hyjyFYKkjfNTero"    
-os.environ['COHERE_API_KEY'] = "6zXEeF9WcwbBmRFExg0b5JSc8ZgH77o1LwuOf1hs"
+os.environ['GROQ_API_KEY'] = os.getenv('GROQ_API_KEY')
+os.environ['GOOGLE_API_KEY'] = os.getenv('GOOGLE_API_KEY')    
+os.environ['COHERE_API_KEY'] = os.getenv('COHERE_API_KEY')
 
 
 # Available voices for Text-to-Speech
